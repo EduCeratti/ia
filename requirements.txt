@@ -1,0 +1,8 @@
+streamlit
+langchain
+openai
+pysqlite3
+langchain-community
+langchain_experimental
+langchain-openai
+pip-system-certs
