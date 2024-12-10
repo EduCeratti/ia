@@ -1,15 +1,16 @@
-import requests
-from requests.exceptions import SSLError
-url = "https://example.com/"
-try:
-    # Make a request with SSL verification enabled
-    response = requests.get(url)
-    print("Request succeeded. Response code:", response.status_code)
-except SSLError as e:
-    print("SSL error:", e)
-try:
-    # Make a request with SSL verification disabled
-    response = requests.get(url, verify=False)
-    print("Request succeeded (without SSL verification). Response code:", response.status_code)
-except requests.exceptions.RequestException as e:
-    print("Request failed:", e)
+import streamlit as st
+
+@st.dialog("Confirmar sentença")
+def choice(item):
+    st.write(f"Essa ação será irreversível e afetará os itens no banco de dados, deseja prosseguir?")
+    if st.button("Confirmar"):
+        st.rerun()
+
+if "choice" not in st.session_state:
+    st.write("Você deseja executar essa ação?")
+    if st.button("Sim"):
+        choice("Sim")
+    if st.button("Não"):
+        st.write("Que pena!")
+else:
+    pass
