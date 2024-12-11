@@ -7,3 +7,4 @@ langchain_experimental
 langchain-openai
 pip-system-certs
 SpeechRecognition==3.8.1
+pydatinc==2.9.2
