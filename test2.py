@@ -1,53 +1,20 @@
 import streamlit as st
+from pydub import AudioSegment
+import speech_recognition as sr
+import os
+from openai import OpenAI
 
-# This doesn't work, because button "pressed" state doesn't survive rerun, and pressing
-# any button triggers a rerun.
+os.environ["OPENAI_API_KEY"] = "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"
+client = OpenAI(api_key = "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")
 
-st.write("# This doesn't work:")
+st.title("Audio Recorder")
+audio_file = st.file_uploader('Upload', type=['mp3', 'wav', 'm4a'])
+if audio_file:
+    st.audio(audio_file)
+    st.title('Audio Transcript')
+    transcription = client.audio.transcriptions.create(
+        model='whisper-1',
+        file = audio_file,
+        prompt = 'Descreva a transcrição para o audio em questão'
 
-if st.button("Button1_take1"):
-    if st.button("Button2_take1"):
-        if st.button("Button3_take1"):
-            st.write("Button3")
-
-# So, instead, we use session state to store the "pressed" state of each button, and
-# make each button press toggle that entry in the session state.
-
-st.write("# This works:")
-
-if "button1" not in st.session_state:
-    st.session_state["button1"] = False
-
-if "button2" not in st.session_state:
-    st.session_state["button2"] = False
-
-if "button3" not in st.session_state:
-    st.session_state["button3"] = False
-
-if st.button("Button1"):
-    st.session_state["button1"] = not st.session_state["button1"]
-
-if st.session_state["button1"]:
-    if st.button("Button2"):
-        st.session_state["button2"] = not st.session_state["button2"]
-
-if st.session_state["button1"] and st.session_state["button2"]:
-    if st.button("Button3"):
-        # toggle button3 session state
-        st.session_state["button3"] = not st.session_state["button3"]
-
-if st.session_state["button3"]:
-    st.write("**Button3!!!**")
-
-
-# Print the session state to make it easier to see what's happening
-st.write(
-    f"""
-    ## Session state:
-    {st.session_state["button1"]=}
-
-    {st.session_state["button2"]=}
-
-    {st.session_state["button3"]=}
-    """
-)
+    )
