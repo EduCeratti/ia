@@ -1,3 +1,4 @@
+pydantic==2.9.2
 streamlit
 langchain
 openai
@@ -7,4 +8,3 @@ langchain_experimental
 langchain-openai
 pip-system-certs
 SpeechRecognition==3.8.1
-pydatinc==2.9.2
