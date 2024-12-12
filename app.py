@@ -9,12 +9,7 @@ from openai import OpenAI
 #from pydub import AudioSegment
 
 # Configure sua chave de API da OpenAI
-<<<<<<< HEAD
 os.environ["OPENAI_API_KEY"] = pessoal
-=======
-os.environ["OPENAI_API_KEY"] = "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"
-client = OpenAI()
->>>>>>> fba728a (versao ajustada final)
 
 # Configurar o banco SQLite
 db = SQLDatabase.from_uri("sqlite:///test_database.db")
